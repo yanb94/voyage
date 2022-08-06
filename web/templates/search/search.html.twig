@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% set nbResult = nb %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": query ? nbResult~" résultat"~(nbResult > 1 ? "s" : "")~" pour "~"\""~query~"\"" : "Recherche", "description": "Tous les articles trouvés pour le mot clé '"~query~"'" }),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+    <div class="search">
+        <div class="search--background"></div>
+        <div class="search--content">
+            <div class="search--content--container">
+                <h1 class="search--content--container--headline">{{ query ? nbResult~" résultat"~(nbResult > 1 ? "s" : "")~" pour "~"\""~query~"\"": "Trouver un article" }}</h1>
+                <div class="search--content--container--search">
+                    <form class="search--content--container--search--form" action="{{ path('sulu_search.website_search') }}" method="GET">
+                        <input name="q" type="text" placeholder="Rechercher" class="search--content--container--search--form--field"/>
+                        <button class="search--content--container--search--form--button" type="submit" aria-label="Rechercher">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="search--content--container--list">
+                    {% if query %}
+                        {% for i, hit in hits %}
+                            {% set article = hit.document.fields|merge({
+                                "title": hit.document.fields.title.value,
+                                "excerptDescription": hit.document.fields.excerptDescription.value,
+                                "url": hit.document.url, 
+                                "excerptImages": [sulu_resolve_media(hit.document.fields.excerptImages.value|json_decode().ids.0,'fr')] 
+                                }) %}
+                            {% include "items/article-item.html.twig" with {"article": article, "nb": loop.index} %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if query %}
+                    {% if page-1 >= 1 or page < maxPage %}
+                        <div class="search--content--pagination-cont">
+                            <div class="search--content--pagination-cont--prev">
+                                {% if page-1 >= 1 %}
+                                    <a href="search?q={{query}}{{ (page-1) > 1 ? "&p="~(page-1) : "" }}" class="prev-button">
+                                        Précédente
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="search--content--pagination-cont--next">
+                                {% if page < maxPage %}
+                                    <a href="search?q={{query}}&amp;p={{ page+1 }}" class="next-button">
+                                        Suivante
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

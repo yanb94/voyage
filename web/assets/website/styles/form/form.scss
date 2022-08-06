@@ -1,0 +1,128 @@
+@use "./../abstracts/" as g;
+
+
+.form
+{
+    &--label
+    {
+        display: block;
+
+        font-family: g.$fontSubtitle;
+        font-size: 22px;
+        font-weight: bold;
+
+        margin-top: 15px;
+        margin-bottom: 5px;
+
+    }
+
+    &--widget-text, &--widget-textarea
+    {
+        display: block;
+        border-radius: 5px;
+        border: 1px solid g.$border-field;
+        width: calc(100% - 20px);
+        padding: 5px 10px;
+
+        font-size: 15px;
+        font-family: g.$fontBody;
+
+        &::placeholder
+        {
+            font-size: 15px;
+            font-family: g.$fontSubtitle;
+            color: g.$placeholder-field;
+            font-style: italic;
+        }
+    }
+
+    &--widget-text
+    {
+        height: 35px;
+    }
+
+    &--widget-textarea
+    {
+        min-height: 200px;
+    }
+
+    &--button-row
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px;
+    }
+
+    &--error
+    {
+        color: g.$tertiaryDark;
+        font-size: 13px;
+        list-style: none;
+        font-family: g.$fontSubtitle;
+        padding: 0;
+        margin: 5px 0;
+    }
+
+    &--checkbox
+    {
+        display: none;
+
+        &:checked
+        {
+            & + .form--checkbox--label
+            {
+                &::before
+                {
+                    content: "✔";
+                    background-color: g.$primaryDark;
+                    font-size: 20px;
+                }
+            }
+        }
+
+        &--label
+        {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            font-family: g.$fontBody;
+            font-weight: bold;
+
+            &::before
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                content: "";
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                left:0; 
+                top:0;
+                border-radius: 5px;
+                border: 2px solid g.$checkbox-border;
+                color: g.$white;
+
+                transition: .3s ease;
+            }
+        }
+    }
+
+}
+
+@media(min-width:g.$breakPointM)
+{
+    .form
+    {
+        &--button-row
+        {
+            justify-content: flex-end;
+        }
+    }
+}

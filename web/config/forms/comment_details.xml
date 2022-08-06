@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<form xmlns="http://schemas.sulu.io/template/template"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/form-1.0.xsd"
+>
+    <key>comment_details</key>
+
+    <properties>
+
+        <property name="articleTitle" type="text_line" mandatory="true" colspan="12" disabledCondition="true == true">
+            <meta>
+                <title>Titre de l'article</title>
+            </meta>
+        </property>
+
+        <property name="content" type="text_area" mandatory="true" colspan="12" disabledCondition="true == true">
+            <meta>
+                <title>Contenu du commentaire</title>
+            </meta>
+        </property>
+
+        <property name="moderate" type="checkbox" colspan="12">
+            <params>
+                <param name="type" value="toggler"/>
+                <param name="label">
+                    <meta>
+                        <title>Modérer le commentaire</title>
+                    </meta>
+                </param>
+            </params>
+        </property>
+    </properties>
+</form>

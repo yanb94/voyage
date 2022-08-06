@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <div class="contact">
+        <div class="contact--background"></div>
+        <div class="contact--content">
+        {% if content.form %}
+            {% if app.request.get('send') != 'true' %}
+                <div class="contact--content--container">
+                    <div class="contact--content--container--title">
+                        {{ content.title }}
+                    </div>
+
+                    {% form_theme content.form 'form/theme.html.twig' %}
+                    {{ form(content.form) }}
+                </div>
+            {% else %}
+                <div class="contact--content--send-cont">
+                    <div class="contact--content--send-cont--title">
+                        Message envoyé
+                    </div>
+                    <div class="contact--content--send-cont--body">
+                        {{ view.form.entity.successText|raw }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+
+    
+
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('contact') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('contact') }}
+{% endblock %}

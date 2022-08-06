@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": success ? "Confirmation de votre inscription" : "Compte non trouvé"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+    
+    <div class="confirmation-registration">
+        <div class="confirmation-registration--background"></div>
+        <div class="confirmation-registration--content">
+            <div class="confirmation-registration--content--container">
+                {% if success %}
+                    <h1 class="confirmation-registration--content--container--title send">Confirmation de votre inscription</h1>
+                    <p class="confirmation-registration--content--container--msg">
+                        Votre inscription a bien été validé vous pouvez dès a présent vous connectez sur le site.
+                    </p>
+                {% else %}
+                    <h1 class="confirmation-registration--content--container--title send">Compte non trouvé</h1>
+                    <p class="confirmation-registration--content--container--msg">
+                        Le compte que vous essayez d'activer est inconnu.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('confirmation-registration') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('confirmation-registration') }}
+{% endblock %}

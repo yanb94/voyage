@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<webspace xmlns="http://schemas.sulu.io/webspace/webspace"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/webspace/webspace http://schemas.sulu.io/webspace/webspace-1.1.xsd">
+    <!-- See: http://docs.sulu.io/en/latest/book/webspaces.html how to configure your webspace-->
+
+    <name>Blog Voyage</name>
+    <key>blog-voyage</key>
+
+    <localizations>
+        <!-- See: http://docs.sulu.io/en/latest/book/localization.html how to add new localizations -->
+        <localization language="fr" default="true"/>
+    </localizations>
+
+    <default-templates>
+        <default-template type="page">default</default-template>
+        <default-template type="home">homepage</default-template>
+    </default-templates>
+
+    <templates>
+        <template type="search">search/search</template>
+        <!-- See: http://docs.sulu.io/en/latest/cookbook/custom-error-page.html how to create a custom error page -->
+        <template type="error">error/error</template>
+        <template type="error-500">error/error-500</template>
+    </templates>
+
+    <navigation>
+        <contexts>
+            <context key="main">
+                <meta>
+                    <title lang="fr">Menu principal</title>
+                </meta>
+            </context>
+            <context key="legal">
+                <meta>
+                    <title lang="fr">Documents Légaux</title>
+                </meta>
+            </context>
+        </contexts>
+    </navigation>
+
+    <portals>
+        <portal>
+            <name>Blog Voyage</name>
+            <key>blog-voyage</key>
+
+            <environments>
+                <environment type="prod">
+                    <urls>
+                        <url language="fr">{host}</url>
+                    </urls>
+                </environment>
+                <environment type="stage">
+                    <urls>
+                        <url language="fr">{host}</url>
+                    </urls>
+                </environment>
+                <environment type="test">
+                    <urls>
+                        <url language="fr">{host}</url>
+                    </urls>
+                </environment>
+                <environment type="dev">
+                    <urls>
+                        <url language="fr">{host}</url>
+                    </urls>
+                </environment>
+                <environment type="initfixtures">
+                    <urls>
+                        <url language="fr">{host}</url>
+                    </urls>
+                </environment>
+            </environments>
+        </portal>
+    </portals>
+
+    <security>
+        <system>Website</system>
+    </security>
+</webspace>

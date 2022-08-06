@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="about">
+        <div class="about--background"></div>
+        <div class="about--content">
+            <div class="about--content--description">
+                <h1 class="about--content--description--question">{{ content.question }}</h1>
+                <p class="about--content--description--content">{{ content.description }}</p>
+            </div>
+            <div class="about--content--members">
+                <h2 class="about--content--members--title">
+                    {{ content.team_title }}
+                </h2>
+                <div class="about--content--members--list">
+                {% for member in content.teamMembers %}
+                    <div class="member member--{{loop.index}}">
+                        <picture>
+                            <source srcset="{{ member.image.thumbnails['90x90.webp'] }}" type="image/webp">
+                            <source srcset="{{ member.image.thumbnails['90x90.jpg'] }}" type="image/jpeg">
+                            <img class="member--image" src="{{ member.image.thumbnails['90x90'] }}" alt="{{ member.name }}" width="100%" height="100%">
+                        </picture>
+                        <div class="member--name">
+                            {{ member.name }}
+                        </div>
+                        <div class="member--desc">
+                            {{ member.description }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('about') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('about') }}
+{% endblock %}

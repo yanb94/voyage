@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="legal--headline">
+        <div class="legal--headline--background"></div>
+        <div class="legal--headline--content">
+            <div class="legal--headline--content--title">
+                {{ content.title }}
+            </div>
+        </div>
+    </div>
+    <div class="legal--body">
+        <div class="legal--body--background"></div>
+        <div class="legal--body--content">
+            <div class="legal--body--content--cont">
+                <div class="legal--body--article">
+                    {{ content.content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('legal') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('legal') }}
+{% endblock %}

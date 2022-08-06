@@ -1,0 +1,124 @@
+@use "./../abstracts/" as g; 
+@use "./../mixins/elements.scss" as element;
+@use './../mixins/effects.scss' as effect;
+
+.comment-item
+{
+    box-shadow: 0 2px 3px rgba($color: g.$shadowColorComment, $alpha: .5);
+    border-radius: 5px;
+
+    position: relative;
+
+    display: grid;
+    grid-template-rows: minmax(60px,auto) minmax(130px,auto) 60px;
+    min-height: 250px;
+
+    margin-bottom: 20px;
+
+    background-color: g.$white;
+
+    &--info
+    {
+        padding: 10px;
+        padding-bottom: 0;
+    }
+
+    &--author
+    {
+        font-weight: bold;
+        font-family: g.$fontSubtitle;
+        font-size: 25px;
+
+        &--link
+        {
+            color: inherit;
+            @include effect.underlineOnHoverWithPosition($color: g.$black, $position: 1px);
+        }
+    }
+
+    &--date
+    {
+        font-size: 15px;
+        font-family: g.$fontSubtitle;
+        font-style: italic;
+        color: g.$colorFontCommentDate;
+    }
+
+    &--content
+    {
+        font-family: g.$fontBody;
+        font-size: 20px;
+        padding: 10px;
+        text-align: justify;
+
+        &--moderate
+        {
+            font-style: italic;
+            font-size: 15px;
+            color: g.$moderateComment;
+        }
+    }
+
+    &--action
+    {
+        font-family: g.$fontBody;
+        font-size: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        padding: 10px;
+        font-weight: bold;
+        color: g.$primaryVDark;
+
+        .delete-comment
+        {
+            color: inherit;
+        }
+    }
+
+    &.answer
+    {
+        width: 80%;
+        margin-left: 20%;
+    }
+    
+}
+
+.comment-answer
+{
+    transition: .5s;
+
+    .form--button-row
+    {
+        min-height: initial;
+        padding: 10px 0;
+    }
+
+    @include element.buttonOfForm($height: 40px,$width: 190px,$fontSize: 25px);
+
+    &--form
+    {
+        margin-top: -25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 3px rgba($color: g.$shadowColorComment, $alpha: .5);
+        padding: 10px;
+        padding-top: 15px;
+
+        &--title
+        {
+            font-family: g.$fontSubtitle;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+    }
+
+    &.answer
+    {
+        width: 80%;
+        margin-left: 20%;
+    }
+}

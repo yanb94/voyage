@@ -1,0 +1,11 @@
+{% extends 'community/email/base-email.html.twig' %}
+
+{% block content %}
+    {% set url = url('sulu_community.confirmation', { token: user.confirmationKey }) %}
+    <mj-hero padding-top="50px" padding-bottom="50px" mode="fluid-height">
+        <mj-text align="center" font-size="15px"> Pour confirmer votre inscription, veuillez cliquer sur le bouton ci-dessous </mj-text>
+        <mj-button background-color="#0E5C63" href="{{ url }}" font-size="15px" font-weight="900">
+        Confirmer mon inscription
+        </mj-button>
+    </mj-hero>
+{% endblock %}

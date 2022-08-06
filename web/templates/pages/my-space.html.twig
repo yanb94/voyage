@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <div class="my-space">
+        <div class="my-space--background"></div>
+        <div class="my-space--content">
+            <div class="my-space--content--container">
+                <div class="my-space--content--container--title">
+                    Bonjour, {{ app.user.contact.firstname }} {{ app.user.contact.lastname }} 
+                </div>
+                <div class="my-space--content--container--list">
+                    <a href="{{ sulu_content_path("/profile") }}" class="my-space--content--container--list--item my-space--content--container--list--item--1">
+                        <div class="my-space--content--container--list--item--icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="my-space--content--container--list--item--text">
+                            Modifier mes infos
+                        </div>
+                    </a>
+
+                    <a href="{{ sulu_content_path("/change-password") }}" class="my-space--content--container--list--item my-space--content--container--list--item--2">
+                        <div class="my-space--content--container--list--item--icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="my-space--content--container--list--item--text">
+                            Changer de mot de passe
+                        </div>
+                    </a>
+
+                    <a href="{{ sulu_content_path("/change-email") }}" class="my-space--content--container--list--item my-space--content--container--list--item--3">
+                        <div class="my-space--content--container--list--item--icon">
+                            <i class="fas fa-at"></i>
+                        </div>
+                        <div class="my-space--content--container--list--item--text">
+                            Changer d'email
+                        </div>
+                    </a>
+
+                    <a href="{{ sulu_content_path("/my-list-comment") }}" class="my-space--content--container--list--item my-space--content--container--list--item--4">
+                        <div class="my-space--content--container--list--item--icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="my-space--content--container--list--item--text">
+                            Voir mes commentaires
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('my-space') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('my-space') }}
+{% endblock %}

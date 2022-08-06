@@ -1,0 +1,13 @@
+{% extends "error/base-error.html.twig" %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "Page non trouvée"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+{% block titleError %}Page non trouvée{% endblock %}
+{% block msgError %} La page que vous cherchiez n'existe pas. Vous pouvez dès a présent continuer votre navigation en cliquant sur le bouton ci-dessous.{% endblock %}

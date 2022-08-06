@@ -1,0 +1,30 @@
+@mixin underlineOnHover($color: #ffff, $height: 3px) {
+    @include underlineOnHoverWithPosition($color: $color, $height: 3px, $position: $height*-1);
+}
+
+@mixin underlineOnHoverWithPosition($color: #ffff, $height: 3px, $position: 0px) {
+    
+    position: relative;
+
+    &::after
+    {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: $height;
+        background-color: $color;
+        bottom: $position;
+        left: 0;
+        border-radius: 10px;
+
+        transition: .5s ease-in-out;
+    }
+
+    &:hover
+    {
+        &::after
+        {
+            width: 100%;
+        }
+    }
+}

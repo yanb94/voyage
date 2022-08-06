@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default([]),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+    {% endblock %}
+
+    {% block style %}
+       {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    {% include "layout/_drawer.html.twig" %}
+    {% include "layout/_search.html.twig" %}
+    {% include "layout/_header.html.twig" %}
+
+    <section id="content" class="layout--content">
+        {% block content %}{% endblock %}
+    </section>
+
+    {# <aside>
+        {% block aside %}{% endblock %}
+    </aside> #}
+
+    {% include "layout/_footer.html.twig" %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</body>
+</html>

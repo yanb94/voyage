@@ -1,0 +1,69 @@
+@use "./../abstracts/" as g;
+@use "./../mixins/buttons.scss" as button;
+
+@mixin background($image, $attachement: initial) {
+    
+    &--background
+    {
+        grid-column: 1;
+        grid-row: 1;
+
+        background-size: cover;
+        background-image: url("../../images/#{$image}/S/#{$image}.jpg");
+        background-attachment: $attachement;
+
+        @media (min-width: g.$breakPointM) {
+            background-image: url("../../images/#{$image}/M/#{$image}.jpg");
+        }
+
+        @media (min-width: g.$breakPointL) {
+            background-image: url("../../images/#{$image}/L/#{$image}.jpg");
+        }
+
+        @media (min-width: g.$breakPointXL) {
+            background-image: url("../../images/#{$image}/XL/#{$image}.jpg");
+        }
+
+        @media( min-width: 1600px)
+        {
+            background-image: url("../../images/#{$image}/#{$image}.jpg");
+        }
+
+        @content;
+
+    }
+}
+
+@mixin pageFull($height: 100vh)
+{
+    min-height: $height;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+@mixin contentSection($color: g.$primaryVDark, $opacity: .4)
+{
+    grid-column: 1;
+    grid-row: 1;
+
+    background-color: rgba($color: $color, $alpha: $opacity);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @content;
+}
+
+@mixin buttonOfForm($height,$width,$fontSize)
+{
+    form
+    {
+        [type="submit"]
+        {
+            @include button.button-tertiary($height: $height,$width: $width,$fontSize: $fontSize);
+        }
+    }
+}

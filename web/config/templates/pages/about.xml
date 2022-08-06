@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>about</key>
+
+    <view>pages/about</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+
+    <meta>
+        <title lang="en">About</title>
+        <title lang="fr">A propos</title>
+    </meta>
+
+    <properties>
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Title</title>
+                <title lang="fr">Titre</title>
+            </meta>
+            <params>
+                <param name="headline" value="true"/>
+            </params>
+
+            <tag name="sulu.rlp.part"/>
+        </property>
+
+        <property name="url" type="resource_locator" mandatory="true">
+            <meta>
+                <title lang="en">Resourcelocator</title>
+                <title lang="fr">Adresse</title>
+            </meta>
+
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <property name="question" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Question</title>
+                <title lang="fr">Question</title>
+            </meta>
+        </property>
+
+        <property name="description" type="text_area" mandatory="true">
+            <meta>
+                <title lang="en">Description</title>
+                <title lang="fr">Description</title>
+            </meta>
+        </property>
+
+        <property name="team_title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Title team</title>
+                <title lang="fr">Titre de l'équipe</title>
+            </meta>
+        </property>
+
+        <block name="teamMembers">
+             <meta>
+                <title lang="fr">Membres de l'équipe</title>
+                <title lang="en">Team Members</title>
+             </meta>
+
+            <types>
+                <type name="member">
+                    <properties>
+                        <property name="name" type="text_line">
+                            <meta>
+                                <title lang="en">Name</title>
+                                <title lang="fr">Nom</title>
+                            </meta>
+                        </property>
+
+                        <property name="image" type="single_media_selection" mandatory="true">
+                            <meta>
+                                <title lang="en">Image</title>
+                                <title lang="fr">Image</title>
+                            </meta>
+
+                            <params>
+                                <param name="types" value="image"/>
+                            </params>
+                        </property>
+
+                        <property name="description" type="text_area" mandatory="true">
+                            <meta>
+                                <title lang="en">Description</title>
+                                <title lang="fr">Description</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </block>
+
+    </properties>
+
+</template>

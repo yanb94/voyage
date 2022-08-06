@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "S'inscrire", "description": "Rejoignez-nous maintenant sur le blog voyage, le blog du voyage et des voyageurs"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="registration">
+        <div class="registration--background"></div>
+        <div class="registration--content">
+            <div class="registration--content--container">
+                {% if app.request.get('send') == 'true' %}
+                    <h1 class="registration--content--container--title send">Inscription prise en compte</h1>
+                    <p class="registration--content--container--msg">
+                        Pour terminer le processus d'inscription vous devez cliquer sur le lien qui vient de vous être envoyé par email.
+                    </p>
+                {% else %}
+                    <h1 class="registration--content--container--title">Rejoignez nous</h1>
+                    {% form_theme form 'form/theme.html.twig' %}
+                    {{ form_start(form) }}
+
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.firstName) }}
+                    
+                    <hr>
+
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    
+                    <hr>
+
+                    {{ form_row(form.plainPassword) }}
+                    
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('registration') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('registration') }}
+{% endblock %}

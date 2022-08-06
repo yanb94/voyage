@@ -1,0 +1,11 @@
+security:
+    providers:
+        sulu:
+            id: test_user_provider
+
+    firewalls:
+        <webspace_key>: # Replace <webspace_key> with the key of your webspace
+            http_basic: ~
+
+sulu_test:
+    enable_test_user_provider: true

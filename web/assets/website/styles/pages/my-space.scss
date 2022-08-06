@@ -1,0 +1,155 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/elements.scss" as element;
+
+.my-space
+{
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+
+    @include element.background($image: "my-space");
+
+    // &--background
+    // {
+    //     grid-column: 1;
+    //     grid-row: 1;
+
+    //     background-size: cover;
+    //     background-image: url('./../../images/my-space.jpg');
+    // }
+
+    &--content
+    {
+        grid-column: 1;
+        grid-row: 1;
+
+        background-color: rgba($color: g.$primaryVDark, $alpha: .4);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--container
+        {
+            margin-top: g.$headerHeightMobile;
+
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            min-height: 300px;
+
+            &--title
+            {
+                font-family: g.$fontSubtitle;
+                font-size: 40px;
+                line-height: 45px;
+                color: g.$white;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &--list
+            {
+                display: grid;
+                justify-content: center;
+                grid-template-columns: repeat(auto-fill, 280px);
+                margin-top: 15px;
+
+                gap: 30px;
+
+
+
+                @for $var from 1 to 10 {
+                    
+                    &--item--#{$var}
+                    {
+                        animation: appear 500ms ease-in forwards;
+                        animation-delay: $var*300ms;
+                    }
+                }
+
+                &--item
+                {
+                    opacity: 0;
+                    background-color: g.$white;
+                    color: g.$black;
+                    border: 1px solid g.$spaceMember-item;
+                    border-radius: 5px;
+
+                    display: grid;
+                    grid-template-rows: 205px auto;
+                    text-align: center;
+
+                    
+
+                    &--icon
+                    {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 145px;
+                    }
+
+                    &--text
+                    {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        font-family: g.$fontSubtitle;
+                        font-weight: bold;
+                        font-size: 35px;
+
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .my-space
+    {
+        &--content
+        {
+            padding: g.$headerHeight 0;
+
+
+            &--container
+            {
+                margin-top: 0;
+
+                &--title
+                {
+                    text-align: left;
+                    margin-bottom: 20px;
+                }
+
+                &--list
+                {
+                    justify-content: initial;
+                }
+            }
+        }
+    }
+}
+
+@keyframes appear
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateX(-20px) translateY(-20px);
+    }
+
+    100%
+    {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}

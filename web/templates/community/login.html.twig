@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "Se connecter", "description": "Connectez vous dès maintenant sur le blog voyage"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="login">
+        <div class="login--background"></div>
+        <div class="login--content">
+        
+            <div class="login--content--container">
+
+                <h1 class="login--content--container--title">Connectez vous</h1>
+
+                <form action="{{ path('sulu_community.login') }}" method="post">
+
+                    {% if error %}
+                        <div class="login--content--container--error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <label class="form--label" for="username">Nom d'utilisateur</label>
+                    <input class="form--widget-text" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Entrez votre nom d'utilisateur"/>
+
+                    <label class="form--label" for="password">Mot de passe</label>
+                    <input class="form--widget-text" type="password" id="password" name="_password" placeholder="Entrez votre mot de passe" />
+
+                    <input class="form--checkbox" type="checkbox" id="remember_me" name="_remember_me" checked />
+                    <label class="form--checkbox--label" for="remember_me">Se souvenir de moi</label>
+
+                    {#
+                        If you want to control the URL the user
+                        <input type="hidden" name="_target_path" value="/account" />
+                    #}
+
+                    <div class="login--content--container--btn-cont">
+                        <button class="login--content--container--btn-login" type="submit">Se connecter</button>
+                    </div>
+                </form>
+
+                <div class="login--content--container--link-cont">
+                    <a class="login--content--container--link" href="{{ path('sulu_community.password_forget') }}">
+                        Mot de passe oublié
+                    </a>
+                    <a class="login--content--container--link" href="{{ path('sulu_community.registration') }}">
+                        S'inscrire
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}

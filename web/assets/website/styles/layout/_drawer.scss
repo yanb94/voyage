@@ -1,0 +1,125 @@
+@use './../abstracts/' as g;
+
+body.drawer
+{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.layout--drawer
+{
+    $heightDrawer: 250px;
+
+    position: fixed;
+    left: ($heightDrawer * -1);
+    bottom: 0;
+    width: $heightDrawer;
+    min-height: calc(100vh - #{g.$headerHeightMobile});
+    z-index: 20;
+
+    overflow-y: scroll;
+
+    background-color: g.$white;
+
+    transition: .7s ease;
+
+    &.open
+    {
+        transform: translateX($heightDrawer);
+    }
+
+    &--background
+    {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: calc(100vh - #{g.$headerHeightMobile});
+        width: 100%;
+        background-color: rgba($color: g.$primary, $alpha: .4);
+        z-index: 19;
+        display: none;
+
+        &.open
+        {
+            display: block;
+        }
+    }
+
+    &--top
+    {
+        background-color: g.$primaryDark;
+        color: g.$white;
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: g.$fontTitle;
+        font-size: 35px;
+
+        height: 200px;
+    }
+
+    &--list
+    {
+        display: grid;
+        grid-auto-rows: 55px;
+
+        height: calc(100vh - (#{g.$headerHeightMobile} + 200px));
+
+        &--item
+        {
+            color: g.$black;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 20px;
+            font-weight: bold;
+            font-family: g.$fontSubtitle;
+            font-size: 24px;
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .layout--drawer
+    {
+        min-height: calc(100vh - #{g.$headerHeight});
+
+        &--background
+        {
+            height: calc(100vh - #{g.$headerHeight});
+        }
+
+        &--list
+        {
+            height: calc(100vh - (#{g.$headerHeight} + 200px));
+        }
+    }
+}
+
+@media(min-width: g.$breakPointL)
+{
+    .layout--drawer
+    {
+        display: none;
+
+        &--background
+        {
+            display: none;
+
+            &.open
+            {
+                display: none;
+            }
+        }
+    }
+
+    body.drawer
+    {
+        height: initial;
+        overflow: initial;
+    }
+}

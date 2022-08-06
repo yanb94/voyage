@@ -1,0 +1,196 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/elements.scss" as element;
+
+.about
+{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+
+    min-height: 100vh;
+
+    @include element.background($image: "about");
+
+    // &--background
+    // {
+    //     background-image: url("./../../images/about.jpg");
+    //     background-size: cover;
+
+    //     z-index: 2;
+
+    //     grid-row: 1;
+    //     grid-column: 1;
+    // }
+
+    &--content
+    {
+        color: g.$white;
+        background-color: rgba($color: g.$primaryVDark, $alpha: .6);
+
+        z-index: 3;
+
+        grid-row: 1;
+        grid-column: 1;
+
+        padding: 0 20px;
+        padding-top: g.$headerHeightMobile;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-direction: column;
+
+
+        &--description
+        {
+            max-width: 1200px;
+            opacity: 0;
+            animation: appear 1.2s ease-in forwards;
+
+            &--question
+            {
+                font-family: g.$fontTitle;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            &--content
+            {
+                font-family: g.$fontBody;
+                font-size: 20px;
+                line-height: 30px;
+                text-align: justify;
+            }
+        }
+
+        &--members
+        {
+            max-width: 1200px;
+            width: 100%;
+            
+            &--title
+            {
+                animation: appear 1.2s ease-in forwards;
+                animation-delay: 500ms;
+                opacity: 0;
+
+                font-weight: bold;
+                font-size: 35px;
+                text-align: center;
+                font-family: g.$fontTitle;
+                padding-bottom: 20px;
+            }
+
+            &--list
+            {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 250px);
+                justify-content: center;
+
+                row-gap: 30px;
+
+                padding-bottom: 35px;
+
+                @for $var from 1 to 8 {
+                    .member--#{$var}
+                    {
+                        transform: translateX(-20px) translateY(-20px);
+                        animation: appearMember 1.2s ease-in forwards;
+                        animation-delay: 800ms + (300ms * $var);
+                        opacity: 0;
+                    }
+                }
+
+                .member
+                {
+                    display: flex;
+
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    height: 250px;
+
+                    &--image
+                    {
+                        border-radius: 100%;
+                    }
+
+                    &--name,&--desc
+                    {
+                        width: 190px;
+                    }
+
+                    &--name
+                    {
+                        text-align: center;
+                        font-family: g.$fontSubtitle;
+                        font-size: 30px;
+                        font-weight: bold;
+                    }
+
+                    &--desc
+                    {
+                        font-family: g.$fontBody;
+                        font-size: 20px;
+                        text-align: center;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .about
+    {
+        &--content
+        {
+            padding-top: g.$headerHeight*1.2;
+        }
+    }
+}
+
+@media(min-width: g.$breakPointL)
+{
+    .about
+    {
+        &--content
+        {
+            padding-top: g.$headerHeight*1.5;
+        }
+    }
+}
+
+@keyframes appear
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100%
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes appearMember
+{
+    0%{
+        transform: translateX(-20px) translateY(-20px);
+        opacity: 0;
+    }
+
+    100%
+    {
+        transform: translate(0);
+        opacity: 1;
+    }
+}

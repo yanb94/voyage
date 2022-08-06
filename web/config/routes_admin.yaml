@@ -1,0 +1,6 @@
+# Define your admin routes here
+app_comments_api:
+    type: rest
+    prefix: /admin/api
+    resource: App\Controller\Admin\CommentController
+    name_prefix: app.

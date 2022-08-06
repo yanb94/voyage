@@ -1,0 +1,49 @@
+<div id="comment-{{ comment.id }}" class="comment-item {{ answer is defined and answer ? "answer" : "" }}">
+    <div class="comment-item--info">
+        <div class="comment-item--author">
+            {% if user is not defined or user == false %}
+                {{ comment.author.username }}
+            {% else %}
+                {% set article = sulu_content_load(comment.idPage,{'title': 'title', 'url': 'url'}).content %}
+
+                <a class="comment-item--author--link" href="{{ sulu_content_path(article.url) }}#comment-{{ comment.id }}" target="_blank">
+                    {{ article.title }}
+                </a>
+            {% endif %}
+        </div>
+        <div class="comment-item--date">
+            {{ comment.createdAt|format_datetime(pattern="dd MMMM yyyy 'à' kk:mm") }}
+        </div>
+    </div>
+    <div class="comment-item--content">
+        {% if comment.moderate and (user is not defined or user == false ) %}
+            <div class="comment-item--content--moderate">
+                Ce commentaire a été modéré par les administrateurs
+            </div>
+        {% elseif comment.moderate and user %}
+            <div class="comment-item--content--moderate">
+                Ce commentaire a été modéré par les administrateurs
+            </div>
+            {{ comment.content }}
+        {% else %}
+            {{ comment.content }}
+        {% endif %}
+    </div>
+    
+    <div class="comment-item--action">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and (user is not defined or user == false ) %}
+            <a class="answer-comment" data-comment-id="{{comment.id}}" data-open="0" >Répondre</a>
+        {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') and user and app.user == comment.author %}
+            <a class="delete-comment" href="{{ path('my-list-comment-delete',{'id': comment.id}) }}">Supprimer</a>
+        {% endif %}
+    </div>
+</div>
+<div class="comment-answer comment-answer--{{comment.id}} {{ answer is defined and answer ? "answer" : "" }}"></div>
+
+{% if user is not defined or user == false %}
+    {% if answer is not defined or not answer %}
+        {% for answer in comment.comments %}
+            {% include "items/comment-item.html.twig" with {'comment': answer, "answer": true} %}
+        {% endfor %}
+    {% endif %}
+{% endif %}

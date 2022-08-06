@@ -1,0 +1,70 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/elements.scss" as element;
+@use './../form/form.scss' as form;
+
+.profile
+{
+    @include element.pageFull();
+
+    @include element.background($image: "profile");
+
+    &--content
+    {
+        @include element.contentSection();
+
+        &--container
+        {
+            background: g.$white;
+
+            width: 100%;
+            height: calc(100% - (#{g.$headerHeightMobile} + 40px));
+            padding: 20px;
+            margin-top: g.$headerHeightMobile;
+            
+            &--title
+            {
+                font-family: g.$fontTitle;
+                font-size: 40px;
+                line-height: 45px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &--success
+            {
+                color: g.$white;
+                background-color: g.$primary;
+                font-family: g.$fontSubtitle;
+                font-weight: bold;
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            @include element.buttonOfForm($height: 60px,$width: 240px,$fontSize: 30px);
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .profile
+    {
+        &--content
+        {
+            padding: g.$headerHeight 0;
+
+            &--container
+            {
+                max-width: 600px;
+                height: auto;
+                margin-top: 0;
+
+                &--title.send
+                {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

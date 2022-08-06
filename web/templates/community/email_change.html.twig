@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "Modifier mon email"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="change-email">
+        <div class="change-email--background"></div>
+        <div class="change-email--content">
+            <div class="change-email--content--container">
+                <h1 class="change-email--content--container--title">Modifier mon email</h1>
+
+                {% for message in app.flashes('success') %}
+                    <p class="change-email--content--container--success">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+
+                {% form_theme form 'form/theme.html.twig' %}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('change-email') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('change-email') }}
+{% endblock %}

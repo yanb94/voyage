@@ -1,0 +1,72 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/elements.scss" as element;
+@use "./../mixins/buttons.scss" as button;
+
+.error-page
+{
+    @include element.pageFull();
+
+    @include element.background($image: "error-page");
+
+    &--content
+    {
+        @include element.contentSection($opacity: .6);
+
+        &--container
+        {
+            color: g.$white;
+
+            max-width: 650px;
+            min-height: calc(100% - #{g.$headerHeightMobile});
+            padding: 20px;
+            margin-top: g.$headerHeightMobile;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            &--title
+            {
+                font-family: g.$fontTitle;
+                font-weight: bold;
+                font-size: 50px;
+                line-height: 50px;
+                text-align: center;
+
+                @media (min-width: g.$breakPointM) {
+                    font-size: 60px;
+                }
+            }
+
+            &--msg
+            {
+                font-family: g.$fontSubtitle;
+                font-size: 25px;
+                text-align: justify;
+
+                
+            }
+
+            &--cont-button
+            {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 280px);
+                justify-content: center;
+                row-gap: 15px;
+
+                .btn-home
+                {
+                    @include button.button-secondary($height: 60px,$width: 250px,$fontSize: 30px);
+                    justify-self: center;
+                }
+
+                .btn-articles
+                {
+                    @include button.button-tertiary($height: 60px,$width: 250px,$fontSize: 30px);
+                    justify-self: center;
+                }
+            }
+        }
+    }
+}

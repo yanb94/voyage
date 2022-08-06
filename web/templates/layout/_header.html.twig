@@ -1,0 +1,40 @@
+<header class="layout--header">
+    <div id="drawer-button" class="layout--header--drawer-button">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="layout--header--logo">
+        <a href="{{ sulu_content_root_path() }}">Blog Voyage</a>
+    </div>
+    <nav class="layout--header--nav">
+        <ul class="layout--header--nav--list">
+            <li>
+                <a href="{{ sulu_content_root_path() }}">Acceuil</a>
+            </li>
+            {% for item in sulu_navigation_root_tree('main') %}
+                <li>
+                    <a href="{{ sulu_content_path(item.url, item.webspaceKey) }}"
+                        title="{{ item.title }}">{{ item.title }}</a>
+                </li>
+            {% endfor %}
+            
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li>
+                    <a href="{{ sulu_content_path("/space") }}">Mon espace</a>
+                </li>
+                <li>
+                    <a href="{{ sulu_content_path("/logout") }}">Déconnexion</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ sulu_content_path("/login") }}">S'identifier</a>
+                </li>
+                <li>
+                    <a href="{{ sulu_content_path("/registration") }}">S'inscrire</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="layout--header--search-button">
+        <i id="search-button" class="fas fa-search"></i>
+    </div>
+</header>

@@ -1,0 +1,48 @@
+$fontTitle: "Catamaran";
+$fontSubtitle: "Work Sans";
+$fontBody: "Hind";
+
+@font-face
+{
+    font-family: $fontTitle;
+    src: url("./../../fonts/Catamaran-Regular.ttf");
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: $fontTitle;
+    src: url("./../../fonts/Catamaran-Bold.ttf");
+    font-display: swap;
+    font-weight: bold;
+}
+
+@font-face
+{
+    font-family: $fontSubtitle;
+    src: url("./../../fonts/WorkSans-Regular.ttf");
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: $fontSubtitle;
+    src: url("./../../fonts/WorkSans-Bold.ttf");
+    font-display: swap;
+    font-weight: bold;
+}
+
+@font-face
+{
+    font-family: $fontBody;
+    src: url("./../../fonts/Hind-Regular.ttf");
+    font-display: swap;
+}
+
+@font-face
+{
+    font-family: $fontBody;
+    src: url("./../../fonts/Hind-Bold.ttf");
+    font-display: swap;
+    font-weight: bold;
+}

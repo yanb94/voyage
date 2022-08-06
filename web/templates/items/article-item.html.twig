@@ -1,0 +1,19 @@
+<div class="article-item article-item--{{ nb }}">
+    <a href="{{ sulu_content_path(article.url) }}">
+        <picture>
+            <source media="(max-width: 768px)" srcset="{{ article.excerptImages[0].thumbnails['310x250.webp'] }}" type="image/webp">
+            <source media="(max-width: 768px)" srcset="{{ article.excerptImages[0].thumbnails['310x250.jpg'] }}" type="image/jpeg">
+            <source media="(min-width: 768px)" srcset="{{ article.excerptImages[0].thumbnails['350x250.webp'] }}" type="image/webp">
+            <source media="(min-width: 768px)" srcset="{{ article.excerptImages[0].thumbnails['350x250.jpg'] }}" type="image/jpeg">
+            <img class="article-item--image" src="{{ article.excerptImages[0].thumbnails['310x250'] }}" alt="{{ article.title }}" width="100%" height="100%" loading="lazy"/>
+        </picture>
+    </a>
+    <div class="article-item--content">
+        <a class="article-item--content--title--link" title="{{ article.title }}" href="{{ sulu_content_path(article.url) }}">
+            <h3 class="article-item--content--title">{{ article.title }}</h3>
+        </a>
+        <div class="article-item--content--desc">
+            {{ article.excerptDescription|striptags }}
+        </div>
+    </div>
+</div>

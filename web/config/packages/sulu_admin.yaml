@@ -1,0 +1,20 @@
+sulu_admin:
+    email: "%env(SULU_ADMIN_EMAIL)%"
+    forms:
+        directories:
+            - "%kernel.project_dir%/config/forms"
+    lists:
+        directories:
+            - "%kernel.project_dir%/config/lists"
+    resources:
+        comments:
+            routes:
+                list: app.get_comments
+                detail: app.get_comment
+sulu_core:    
+    locales:
+        en: English
+        fr: Français
+    translations:
+        - en
+        - fr

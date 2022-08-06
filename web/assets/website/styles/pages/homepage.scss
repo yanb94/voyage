@@ -1,0 +1,240 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/buttons.scss" as button;
+
+@use "./../items/article-item.scss";
+
+@use "./../mixins/elements.scss" as element;
+
+.homepage
+{
+    &--headline
+    {
+        min-height: 100vh;
+
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+
+        color: g.$white;
+
+        @include element.background($image: "homepage");
+
+        // &--background
+        // {
+        //     grid-row: 1;
+        //     grid-column: 1;
+        //     z-index: 1;
+        //     width: 100%;
+        //     height: 100%;
+
+        //     display: flex;
+        //     justify-content: stretch;
+        //     align-items: stretch;
+
+        //     background-image: url("../../images/homepage.jpg");
+        //     background-size: cover;
+        // }
+
+        &--content
+        {
+            grid-row: 1;
+            grid-column: 1;
+            z-index: 2;
+
+            background-color: rgba($color: g.$primaryVDark, $alpha: .2);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+            $animation: 1s enterAnimation ease-in-out;
+
+            h1
+            {
+                font-size: 50px;
+                color: inherit;
+                font-weight: bold;
+                font-family: g.$fontTitle;
+                margin:0;
+
+                animation: $animation;
+            }
+
+            p
+            {
+                font-size: 25px;
+                line-height: 30px;
+                color: inherit;
+                font-weight: bold;
+                text-align: center;
+                font-family: g.$fontSubtitle;
+                margin: 0 20px;
+
+                animation: $animation;
+            }
+
+            .buttons--cont
+            {
+                display: grid;
+                grid-template-rows: auto auto;
+                margin-top: 25px;
+                grid-gap: 15px;
+
+                animation: $animation;
+
+                .btn-our-article
+                {
+                    @include button.button(
+                        $color: g.$white,
+                        $backgroundColor: g.$tertiaryDark,
+                        $height: 60px,
+                        $width: 245px,
+                        $fontSize: 30px,
+                        $colorShadow: rgba(g.$tertiaryVDark, .16)
+                    );
+                }
+
+                .btn-about
+                {
+                    @include button.button(
+                        $color: g.$white,
+                        $backgroundColor: g.$secondaryDark,
+                        $height: 60px,
+                        $width: 245px,
+                        $fontSize: 30px,
+                        $colorShadow: rgba(g.$secondaryVDark, .16)
+                    );
+                }
+            }
+        }
+    }
+
+    &--list
+    {
+        background-color: g.$primary;
+        color: g.$white;
+
+        h2
+        {
+            font-family: g.$fontTitle;
+            font-weight: bold;
+            font-size: 40px;
+            color: inherit;
+            padding-top: 20px;
+            text-align: center;
+            line-height: 45px;
+        }
+
+        &--cont
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 310px);
+            gap: 20px;
+            justify-content: center;
+            padding: 25px 0;
+        }
+
+        &--see-more
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            &--button
+            {
+                @include button.button(
+                    $color: g.$white,
+                    $backgroundColor: g.$tertiaryDark,
+                    $height: 60px,
+                    $width: 300px,
+                    $fontSize: 30px,
+                    $colorShadow: rgba(g.$tertiaryVDark, .16)
+                );
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .homepage
+    {
+        &--headline
+        {
+            &--content
+            {
+                h1
+                {
+                    font-size: 60px;
+                }
+
+                p
+                {
+                    font-size: 30px;
+                }
+
+                .buttons--cont
+                {
+                    grid-template-rows: auto;
+                    grid-template-columns: auto auto;
+                }
+            }
+        }
+
+        &--list
+        {
+            &--cont
+            {
+                grid-template-columns: repeat(auto-fill, 350px);
+                row-gap: 40px;
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointL)
+{
+    .homepage
+    {
+        &--list
+        {
+            &--cont
+            {
+                column-gap: 50px;
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointXL)
+{
+    .homepage
+    {
+        &--list
+        {
+            &--cont
+            {
+                grid-template-columns: repeat(3, 350px);
+            }
+        }
+    }
+}
+
+@keyframes enterAnimation
+{
+    0%
+    {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    100%
+    {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

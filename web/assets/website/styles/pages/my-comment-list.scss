@@ -1,0 +1,76 @@
+@use './../abstracts/' as g;
+@use './../layout/' as layout;
+@use "./../mixins/elements.scss" as element;
+
+@use "./../items/comment-item.scss";
+
+.my-comment-list
+{
+    @include element.pageFull();
+
+    @include element.background($image: "my-comment-list",$attachement: fixed);
+
+    &--content
+    {
+        @include element.contentSection();
+
+        &--container
+        {
+            margin-top: g.$headerHeightMobile;
+
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            min-height: calc(100% - #{g.$headerHeightMobile});
+
+            &--title
+            {
+                font-family: g.$fontSubtitle;
+                font-size: 40px;
+                line-height: 45px;
+                color: g.$white;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &--list
+            {
+                margin-top: 30px;
+
+                &--alert-success
+                {
+                    color: g.$white;
+                    font-family: g.$fontSubtitle;
+                    font-weight: bold;
+                    font-size: 20px;
+                    padding: 15px;
+                    background-color: g.$primary;
+
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .my-comment-list
+    {
+        &--content
+        {
+            padding: g.$headerHeight 0;
+
+            &--container
+            {
+                margin-top: 0;
+
+                &--title
+                {
+                    text-align: left;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}

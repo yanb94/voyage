@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "Modifier mes infos"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="profile">
+        <div class="profile--background"></div>
+        <div class="profile--content">
+            <div class="profile--content--container">
+                <h1 class="profile--content--container--title">Modifier mes données</h1>
+
+                {% for message in app.flashes('success') %}
+                    <p class="profile--content--container--success">
+                        Vos infos ont bien été modifié
+                    </p>
+                {% endfor %}
+
+                {% form_theme form 'form/theme.html.twig' %}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('profile') }}
+{% endblock %}

@@ -1,0 +1,21 @@
+@use "./../abstracts/" as g;
+
+.layout--content
+{
+    // padding-top: g.$headerHeightMobile;
+    min-height: calc(100vh - #{g.$headerHeightMobile});
+
+    &.search
+    {
+        min-height: 100vh!important;
+    }
+}
+
+@media(min-width:g.$breakPointM)
+{
+    .layout--content
+    {
+        // padding-top: g.$headerHeight;
+        min-height: calc(100vh - #{g.$headerHeight});
+    }
+}

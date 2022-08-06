@@ -1,0 +1,15 @@
+{% extends "error/base-error.html.twig" %}
+
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "Erreur du serveur"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block titleError %}Erreur du serveur{% endblock %}
+{% block msgError %}Le serveur a rencontré une erreur. Nous nous excusons pour la gène occassioné. Vous pouvez essayer de poursuivre votre navigation via les boutons ci-dessous ou réessayer plus tard.{% endblock %}

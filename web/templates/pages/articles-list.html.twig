@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="our-articles">
+        <div class="our-articles--background"></div>
+        <div class="our-articles--content">
+            <div class="our-articles--content--list">
+                {% for article in content.pages %}
+                    {% include "items/article-item.html.twig" with {"article": article, "nb": loop.index} %}
+                {% endfor %}
+            </div>
+            {% set page = view.pages.page %}
+            {% if page-1 >= 1 or view.pages.hasNextPage %}
+                <div class="our-articles--content--pagination-cont">
+                    <div class="our-articles--content--pagination-cont--prev">
+                        {% if page-1 >= 1 %}
+                            <a href="{{ sulu_content_path(content.url) }}?p={{ page-1 }}" class="prev-button">
+                                Précédente
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="our-articles--content--pagination-cont--next">
+                        {% if view.pages.hasNextPage %}
+                            <a href="{{ sulu_content_path(content.url) }}?p={{ page+1 }}" class="next-button">
+                                Suivante
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('articles-list') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('articles-list') }}
+{% endblock %}

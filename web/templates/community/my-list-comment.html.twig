@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default({"title": "La liste de vos commentaires"}),
+            "content": content|default([]),
+            "localizations": localizations|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
+{% endblock %}
+
+{% block content %}
+
+<div class="my-comment-list">
+    <div class="my-comment-list--background"></div>
+    <div class="my-comment-list--content">
+        <div class="my-comment-list--content--container">
+            <div class="my-comment-list--content--container--title">
+                Vos commentaires
+            </div>
+            <div class="my-comment-list--content--container--list">
+            {% for message in app.flashes('success') %}
+                <div class="my-comment-list--content--container--list--alert-success">
+                    Votre commentaire a bien été supprimer
+                </div>
+            {% endfor %}
+                {% for comment in comments %}
+                    {% include "items/comment-item.html.twig" with {"comment": comment, "user": true} %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('my-comment-list') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('my-comment-list') }}
+{% endblock %}

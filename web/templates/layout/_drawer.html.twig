@@ -1,0 +1,41 @@
+<div class="layout--drawer--background">
+    
+</div>
+<div id="drawer" class="layout--drawer">
+    <div class="layout--drawer--top">
+        Blog Voyage
+    </div>
+    <div class="layout--drawer--list">
+        <a class="layout--drawer--list--item" href="{{ sulu_content_root_path() }}">
+            Acceuil
+        </a>
+        <a class="layout--drawer--list--item" href="{{ sulu_content_path("/articles") }}">
+            Nos Articles
+        </a>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="layout--drawer--list--item" href="{{ sulu_content_path("/space") }}">
+                Espace Membre
+            </a>
+            <a class="layout--drawer--list--item" href="{{ sulu_content_path("/logout") }}">
+                Déconnexion
+            </a>
+        {% else %}
+            <a class="layout--drawer--list--item" href="{{ sulu_content_path("/login") }}">
+                S'identifier
+            </a>
+            <a class="layout--drawer--list--item" href="{{ sulu_content_path("/registration") }}">
+                S'inscrire
+            </a>
+        {% endif %}
+
+        <a class="layout--drawer--list--item" href="{{ sulu_content_path("/a-propos") }}">
+            A propos
+        </a>
+        {% for item in sulu_navigation_root_tree('legal',3,true) %}
+            <a class="layout--drawer--list--item" href="{{ sulu_content_path(item.url, item.webspaceKey) }}"
+                title="{{ item.excerpt.title }}">
+                {{ item.excerpt.title }}
+            </a>
+        {% endfor %}
+    </div>
+</div>

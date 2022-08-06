@@ -1,0 +1,71 @@
+# To enable security bundle for website you need to change `config/bundles.php` file
+#security:
+#    encoders:
+#        Sulu\Bundle\SecurityBundle\Entity\User: bcrypt
+#
+#    providers:
+#        sulu:
+#            id: sulu_security.user_provider
+#
+#    firewalls:
+#        website:
+#            pattern: ^/
+#            anonymous: lazy
+#            # The login and logout routes need to be created.
+#            # For an advanced user management with registration and opt-in emails have a look at the:
+#            # https://github.com/sulu/SuluCommunityBundle
+#            form_login:
+#                login_path: login
+#                check_path: login
+#            logout:
+#                path: logout
+#                target: /
+#            remember_me:
+#                secret:   "%kernel.secret%"
+#                lifetime: 604800 # 1 week in seconds
+#                path:     /
+#
+#sulu_security:
+#    checker:
+#        enabled: true
+
+security:
+    encoders:
+        Sulu\Bundle\SecurityBundle\Entity\User: bcrypt
+
+    providers:
+        sulu:
+            id: sulu_security.user_provider
+
+    access_control:
+        # needed when firewall on ^/ is not anonymous
+        - { path: "/login", roles: IS_ANONYMOUS }
+        - { path: "/registration", roles: IS_ANONYMOUS }
+        - { path: "/password-reset", roles: IS_ANONYMOUS }
+        - { path: "/password-forget", roles: IS_ANONYMOUS }
+        # - { path: '/_fragment', roles: IS_ANONYMOUS }
+        - { path: "/profile", roles: ROLE_SULU_MEMBER }
+        - { path: "/space", roles: ROLE_SULU_MEMBER }
+        - { path: "/completion", roles: ROLE_SULU_MEMBER }
+        - { path: "/change-password", roles: ROLE_SULU_MEMBER }
+        - { path: "/change-email", roles: ROLE_SULU_MEMBER }
+        - { path: "/my-list-comment", roles: ROLE_SULU_MEMBER }
+
+    firewalls:
+        blog-voyage: # Replace <webspace_key> with the key of your webspace
+            pattern: ^/
+            anonymous: lazy
+            form_login:
+                login_path: sulu_community.login
+                check_path: sulu_community.login
+            logout:
+                path: sulu_community.logout
+                target: /
+            remember_me:
+                secret: "%kernel.secret%"
+                lifetime: 604800 # 1 week in seconds
+                path: /
+
+sulu_security:
+    checker:
+        enabled: true

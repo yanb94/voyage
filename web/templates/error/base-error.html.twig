@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+
+    {% block headTitleError %}{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="error-page">
+        <div class="error-page--background"></div>
+        <div class="error-page--content">
+            <div class="error-page--content--container">
+                <h1 class="error-page--content--container--title">{% block titleError %}{% endblock %}</h1>
+                <p class="error-page--content--container--msg">{% block msgError %}{% endblock %}</p>
+                <div class="error-page--content--container--cont-button">
+                    <a class="btn-home" href="{{ sulu_content_root_path() }}">Acceuil</a>
+                    <a class="btn-articles" href="{{ sulu_content_path("/articles") }}">Nos articles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('error-page') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('error-page') }}
+{% endblock %}

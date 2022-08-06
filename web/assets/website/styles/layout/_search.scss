@@ -1,0 +1,115 @@
+@use './../abstracts/' as g;
+
+body.search
+{
+    height: 100vh;
+    overflow: hidden;
+}
+
+.layout--search
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: -100%;
+    bottom: 100%;
+    left:0;
+    right: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 30;
+    background-color: g.$white;
+
+    transition: 1s;
+
+    &.open
+    {
+        top:0;
+        bottom: 0;
+    }
+
+    &--close
+    {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 40px;
+    }
+
+    &--form
+    {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+
+        &--field
+        {
+            font-size: 35px;
+            font-family: g.$fontSubtitle;
+            width: 240px;
+            border-radius: 5px 0 0 5px;
+            border: 2px solid g.$spaceBorder-field;
+
+            &::placeholder
+            {
+                color: g.$placeholder-field;
+            }
+        }
+
+        &--button
+        {
+            background-color: g.$primaryDark;
+            color: g.$white;
+            font-size: 30px;
+            border: 0;
+            border-radius: 0 5px 5px 0px;
+
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .layout--search
+    {
+        &--form
+        {
+            &--field
+            {
+                width: 300px;
+                font-size: 45px;
+            }
+
+            &--button
+            {
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointL)
+{
+    .layout--search
+    {
+        &--form
+        {
+            &--field
+            {
+                width: 400px;
+                font-size: 50px;
+            }
+
+            &--button
+            {
+                font-size: 45px;
+            }
+        }
+    }
+}

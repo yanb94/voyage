@@ -1,0 +1,176 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/buttons.scss" as button;
+
+@use "./../items/article-item.scss";
+
+@use "./../mixins/elements.scss" as element;
+
+.our-articles
+{
+    display: grid;
+    min-height: 100vh;
+
+    @include element.background($image: "articles-list");
+
+    // &--background
+    // {
+    //     grid-row: 1;
+    //     grid-column: 1;
+    //     z-index: 1;
+
+    //     background-image: url('./../../images/articles-list.jpg');
+    //     background-size: cover;
+    // }
+
+    &--content
+    {
+        display: grid;
+        grid-template-rows: auto;
+
+
+        min-height: 100vh;
+
+        grid-row: 1;
+        grid-column: 1;
+
+        z-index: 2;
+
+        background-color: rgba($color: g.$primaryVDark, $alpha: .4);
+
+        &--list
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 310px);
+            gap: 20px;
+            padding-top: g.$headerHeightMobile + 10px;
+            padding-bottom: 50px;
+            justify-content: center;
+
+            @for $var from 1 to 9 {
+                & > .article-item--#{$var}
+                {
+                    animation: appearAnimation .5s ease-in forwards;
+                    animation-delay: 300ms * $var;
+
+                    transform: translateX(-20px) translateY(-20px);
+                    opacity: 0;
+                }
+            }
+        }
+
+        &--pagination-cont
+        {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 10px;
+            justify-content: center;
+            padding-bottom: 50px;
+
+            max-width: 1150px;
+            width: 100%;
+
+            margin-left: auto;
+            margin-right: auto;
+
+            // height: 200px;
+
+            .prev-button
+            {
+                @include button.button-secondary(
+                    $height: 60px,
+                    $width: 240px,
+                    $fontSize: 30px
+                );
+            }
+
+            .next-button
+            {
+                @include button.button-tertiary(
+                    $height: 60px,
+                    $width: 240px,
+                    $fontSize: 30px
+                );
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .our-articles
+    {
+        &--content
+        {
+            &--list
+            {
+                grid-template-columns: repeat(auto-fill, 350px);
+                padding-top: g.$headerHeight + 10px;
+            }
+
+            &--pagination-cont
+            {
+                grid-row: auto;
+                grid-template-columns: repeat(2, 1fr);
+
+                &--prev
+                {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding-left: 25px;
+                }
+
+                &--next
+                {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    padding-right: 25px;
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointL)
+{
+    .our-articles
+    {
+        &--content
+        {
+            &--list
+            {
+                gap: 50px;
+            }
+        }
+    }
+}
+
+@media(min-width: g.$breakPointXL)
+{
+    .our-articles
+    {
+        &--content
+        {
+            &--list
+            {
+                grid-template-columns: repeat(3, 350px);
+            }
+        }
+    }
+}
+
+@keyframes appearAnimation
+{
+    0%{
+        transform: translateX(-20px) translateY(-20px);
+        opacity: 0;
+    }
+
+    100%
+    {
+        transform: translate(0);
+        opacity: 1;
+    }
+}

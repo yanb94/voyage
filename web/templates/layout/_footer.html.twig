@@ -1,0 +1,39 @@
+<footer class="layout--footer">
+    <div class="layout--footer--infos">
+        <div class="layout--footer--infos--title">Blog Voyage</div>
+        <div class="layout--footer--infos--desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras vel dui auctor, rhoncus metus eu, convallis mi.
+            Vivamus ultrices nisi ipsum, tempus tincidunt magna convallis id.
+            Sed laoreet commodo imperdiet.
+        </div>
+        <div class="layout--footer--infos--actions">
+            <div>
+                <a href="{{ sulu_content_path("/a-propos") }}">A propos</a>
+            </div>
+            {% for item in sulu_navigation_root_tree('legal',3,true) %}
+                <div>
+                    <a href="{{ sulu_content_path(item.url, item.webspaceKey) }}"
+                        title="{{ item.excerpt.title }}">{{ item.excerpt.title }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="layout--footer--socials">
+        <div class="layout--footer--socials--title">Réseaux Sociaux</div>
+        <div class="layout--footer--socials--cont">
+            <a title="Compte Twitter" class="layout--footer--socials--button twitter" href="https://twitter.com/">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a title="Page Facebook" class="layout--footer--socials--button facebook" href="http://facebook.com/">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a title="Page Pinterest" class="layout--footer--socials--button pinterest" href="https://www.pinterest.fr/">
+                <i class="fab fa-pinterest-p"></i>
+            </a>
+        </div>
+    </div>
+    <div class="layout--footer--copyright">
+        <p>Copyright {{ 'now'|date('Y') }} - Blog Voyage</p>
+    </div>
+</footer>

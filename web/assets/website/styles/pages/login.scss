@@ -1,0 +1,125 @@
+@use "./../abstracts/" as g;
+@use "./../layout/" as layout;
+@use "./../mixins/buttons.scss" as button;
+@use "./../mixins/effects.scss" as effect;
+@use "./../mixins/elements.scss" as element;
+@use './../form/form.scss' as form;
+
+.login
+{
+    @include element.pageFull();
+    @include element.background($image: 'login');
+
+
+    &--content
+    {
+        grid-column: 1;
+        grid-row: 1;
+
+        background-color: rgba($color: g.$primaryVDark, $alpha: .4);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--container
+        {
+            background: g.$white;
+
+            width: 100%;
+            height: calc(100% - (#{g.$headerHeightMobile} + 40px));
+            padding: 20px;
+            margin-top: g.$headerHeightMobile;
+            // max-width: 600px;
+
+            &--title
+            {
+                font-family: g.$fontTitle;
+                font-size: 40px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &--btn-cont
+            {
+                height: 90px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &--btn-login
+            {
+                @include button.button-tertiary($height: 60px,$width: 240px,$fontSize: 30px);
+            }
+
+            &--link-cont
+            {
+                margin-top: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            &--link
+            {
+                text-align: center;
+
+                color: g.$primaryVDark;
+                font-family: g.$fontBody;
+                font-size: 18px;
+                margin-bottom: 10px;
+                font-weight: bold;
+
+                @include effect.underlineOnHoverWithPosition($color: g.$primaryVDark, $height: 2px, $position: 1px);
+            }
+
+            &--error
+            {
+                background-color: g.$tertiary;
+                color: g.$white;
+                font-family: g.$fontSubtitle;
+                font-weight: bold;
+                font-size: 20px;
+                padding: 15px;
+            }
+
+        }
+    }
+}
+
+
+@media(min-width: g.$breakPointM)
+{
+    .login
+    {
+        &--content
+        {
+            padding: g.$headerHeight 0;
+
+            &--container
+            {
+                max-width: 600px;
+                height: auto;
+                margin-top: 0;
+
+                &--link-cont
+                {
+                    flex-direction: row;
+                }
+
+                &--link
+                {
+                    margin-bottom: 0;
+                    margin-left: 30px;
+
+                    &:nth-of-type(1)
+                    {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+@use "./../abstracts/" as g;
+@use "./../mixins/effects.scss" as effect;
+
+.article-item
+{
+    width: 310px;
+    height: 450px;
+
+    display: grid;
+    grid-template-rows: 250px auto;
+
+    background-color: g.$white;
+    color: g.$black;
+
+    box-shadow: 0 3px 6px g.$primaryVDark;
+
+    &--content
+    {
+        overflow: hidden;
+        height: 100%;
+
+        &--title
+        {
+            font-family: g.$fontSubtitle;
+            font-size: 30px;
+            font-weight: bold;
+            display: inline-block;
+            @include effect.underlineOnHover(#000);
+
+            &--link
+            {
+                color: inherit;
+                display: block;
+                margin: 5px 10px;
+            }
+        }
+
+        &--desc
+        {
+            margin: 5px 10px;
+            text-align: justify;
+            font-family: g.$fontBody;
+            font-size: 20px;
+            display: block;
+            overflow: hidden;
+        }
+    }
+}
+
+@media(min-width: g.$breakPointM)
+{
+    .article-item
+    {
+        width: 350px;
+
+        &--content
+        {
+            &--title
+            {
+                font-size: 35px;
+            }
+        }
+    }
+}

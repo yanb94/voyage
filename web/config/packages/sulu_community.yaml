@@ -1,0 +1,32 @@
+sulu_community:
+    webspaces:
+        blog-voyage:
+            from: "%env(SULU_ADMIN_EMAIL)%"
+            role: Member
+            login:
+              template: "community/login.html.twig"
+            registration:
+              template: "community/registration-form.html.twig"
+              email:
+                subject: Confirmer votre inscription
+                user_template: "community/email/registration-email.html.twig"
+              type: App\Form\RegistrationType
+            confirmation:
+              auto_login: false
+              template: "community/confirmation-message.html.twig"
+            password_forget:
+              template: community/password-forget-form.html.twig
+              type: App\Form\PasswordForgetType
+              email:
+                subject: "Réinitialiser votre mot de passe"
+                user_template: community/email/password-forget-email.html.twig
+            profile:
+              template: community/profile-form.html.twig
+              type: App\Form\ProfileType
+            password_reset:
+              auto_login: false
+              template: community/password-reset-form.html.twig
+              email:
+                subject: "Votre mot de passe a été réinitialiser"
+                user_template: community/email/password-reset-email.html.twig
+              type: App\Form\PasswordResetType

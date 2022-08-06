@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="article--headline">
+        {% set image = content.image %}
+        <div class="article--headline--background" style="background-image: url({{ image.thumbnails['original'] }})"></div>
+        <div class="article--headline--content">
+            <div class="article--headline--content--title">
+                {{ content.title }}
+            </div>
+        </div>
+    </div>
+    <div class="article--body">
+        <div class="article--body--background"></div>
+        <div class="article--body--content">
+            <div class="article--body--content--cont">
+                <div class="article--body--article">
+                    {{ content.content|raw }}
+                </div>
+                <div class="article--body--date">
+                    {{ "De "~sulu_resolve_user(author).username~", le "~(published|format_datetime(pattern="dd MMMM yyyy 'à' kk:mm")) }}
+                </div>
+                <div class="article--body--other-info">
+                    <div class="article--body--other-info--nb-comment">
+                        <i class="fas fa-comments"></i> {{ render(controller("App\\Controller\\Website\\ArticleController::countComment",{'idPage': id})) }}
+                    </div>
+                    <div class="article--body--other-info--socials">
+                        <span class="article--body--other-info--socials--share">Partagez </span>
+                        <a class="article--body--other-info--socials--button twitter" title="Partagez sur twitter" href="https://twitter.com/">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="article--body--other-info--socials--button facebook" title="Partagez sur facebook" href="http://facebook.com/">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="article--body--other-info--socials--button pinterest" title="Partagez sur pinterest" href="https://www.pinterest.fr/">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <div class="article--body--form-comment">
+                        <div class="article--body--form-comment--title">
+                            Commentez cet article
+                        </div>
+                        <div class="article--body--form-comment--cont">
+                            {% form_theme form 'form/theme.html.twig' %}
+                            {{ form(form) }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="article--body--no-comment">
+                        <div class="article--body--no-comment--msg">
+                            Vous devez vous connecter pour pouvoir ajouter un commentaire.
+                            <a class="article--body--no-comment--link" href="{{ sulu_content_path("/login") }}"> Se connecter </a>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="article--body--comment-list">
+                    {{ render(controller("App\\Controller\\Website\\ArticleController::listAction",{'idPage': id})) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('article') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('article') }}
+{% endblock %}

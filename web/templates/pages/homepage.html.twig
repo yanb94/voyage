@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <div class="homepage--headline">
+        <div class="homepage--headline--background">
+        </div>
+        <div class="homepage--headline--content">
+            <h1>{{ content.title }}</h1>
+            <p>{{ content.desc }}</p>
+
+            <div class="buttons--cont">
+                <a class="btn-our-article" href="{{ sulu_content_path("/articles") }}">Nos articles</a>
+                <a class="btn-about" href="{{ sulu_content_path("/a-propos") }}">A propos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage--list">
+        <h2>Nos derniers articles</h2>
+        <div class="homepage--list--cont">
+        
+        {% for article in content.pages %}
+            {% include "items/article-item.html.twig" with {"article" : article, "nb": loop.index} %}
+        {% endfor %}
+        
+        </div>
+        <div class="homepage--list--see-more">
+            <a class="homepage--list--see-more--button" href="{{ sulu_content_path("/articles") }}">
+                En voir plus
+            </a>
+        </div>
+        
+    </div>
+
+
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('homepage') }}
+{% endblock %}

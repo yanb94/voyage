@@ -1,0 +1,14 @@
+<div class="layout--search">
+
+    <div class="layout--search--close">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <form class="layout--search--form" action="{{ path('sulu_search.website_search') }}" method="GET">
+        <input name="q" type="text" placeholder="Rechercher" class="layout--search--form--field"/>
+        <button class="layout--search--form--button" aria-label="Rechercher" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+
+</div>
